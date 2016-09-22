@@ -1,0 +1,80 @@
+<ion-view view-title="Registration" class="main-bg-color">
+  <ion-content>
+ 	<!-- accordian code below-->
+  	<ion-list>
+        <div>
+          <ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+                Your Account 
+          </ion-item>
+          <div ng-show="isGroupShown(group)">
+            <label class="item item-input dark-input">
+            	<input type="tel" placeholder="Phone number" ng-model="user.register_phone">
+            </label>
+            <label class="item item-input dark-input">
+            	<input type="password" placeholder="Password" ng-model="user.register_password">
+            </label>
+            <label class="item item-input dark-input">
+            	<input type="password" placeholder="Confirm Password" ng-model="user.register_cpassword">
+            </label>
+          </div>
+          <ion-item class="item-stable" ng-click="toggleGroup1(group1)" ng-class="{active: isGroupShown1(group1)}">
+              <i class="icon" ng-class="isGroupShown1(group1) ? 'ion-minus' : 'ion-plus'"></i>
+                Your Information 
+          </ion-item>
+          <div ng-show="isGroupShown1(group1)">
+          	<label class="item item-input dark-input">
+            	<input type="text" placeholder="Email" ng-model="user.register_email">
+            </label>
+            <label class="item item-input dark-input">
+               	<input type="text" placeholder="Your Name" ng-model="user.register_name">
+            </label>
+            <div class="padding text-right">
+              <button class="button login-button" ng-click="register(user)">
+                Create account
+              </button>
+            </div>
+          </div>
+        </div>
+    </ion-list>
+    <div class="padding text-center">
+     	<a href="#/app/login" class="positive">Login</a>
+    </div>
+	<!--accordian code above-->
+  
+  
+  
+    <!-- Logo -->
+    <!--<div class="padding text-center">
+      <h1>
+        <i class="energized ion-bag"></i>
+      </h1>
+      <h2 class="energized">Contact Book</h2>
+      <p class="energized">Contacts Management</p>
+    </div>-->
+
+    <!-- Signup form -->
+   <!-- <div class="list list-inset no-bg">
+      <label class="item item-input dark-input">
+        <input type="text" placeholder="Email" ng-model="user.register_email">
+      </label>
+	  <label class="item item-input dark-input">
+        <input type="text" placeholder="Your Name" ng-model="user.register_name">
+      </label>
+      <label class="item item-input dark-input">
+        <input type="password" placeholder="Password" ng-model="user.register_password">
+      </label>
+	  <label class="item item-input dark-input">
+        <input type="password" placeholder="Confirm Password" ng-model="user.register_cpassword">
+      </label>
+    </div>
+
+    <div class="padding text-center">
+      <button class="button button-block login-button" ng-click="register(user)">
+        Create account
+      </button>
+      <a href="#/app/login" class="positive">Login</a>
+    </div>-->
+
+  </ion-content>
+</ion-view>

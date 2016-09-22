@@ -1,0 +1,39 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Sms\"><param name=\"ios-package\" value=\"Sms\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.cordova.plugins.sms": {
+            "PACKAGE_NAME": "com.phonegap.root"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "id": "com.cordova.plugins.sms.Sms",
+            "file": "plugins/com.cordova.plugins.sms/www/sms.js",
+            "pluginId": "com.cordova.plugins.sms",
+            "clobbers": [
+                "window.sms"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "com.cordova.plugins.sms": "0.1.10"
+    }
+}

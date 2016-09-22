@@ -1,0 +1,31 @@
+<ion-view view-title="Sign-In">
+	<ion-content>
+	<p class="text-center" style="margin-top:90px; color:#666; font-size:48px;">
+	  MCBM
+	</p>
+	<div class="list no-bg" style="margin-top:50px;">
+      <label class="item item-input dark-input">
+        <input type="text" placeholder="Email" ng-model="user.username">
+      </label>
+      <label class="item item-input dark-input">
+        <input type="password" placeholder="Type Password"  ng-model="user.password">
+      </label>
+    </div>
+    <ul class="list">
+			<li class="item-checkbox">
+				 <label class="checkbox">
+				   <input type="checkbox">
+				 </label>
+			 Remember me
+			</li>
+	</ul>
+    <div class="padding text-center">
+      <button class="button  login-button" ng-click="signIn(user)">
+        Sign in
+      </button>
+	  <a href="#/app/forgot" style="color:#666; margin-top:10px;"" class="positive">Forgot password ?</a>
+      <a href="#/app/register" style="color:#666; margin-top:50px;" class="positive"> Create account</a>
+    </div>
+    
+    </ion-content>
+  </ion-view>

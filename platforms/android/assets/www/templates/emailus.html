@@ -1,0 +1,25 @@
+<ion-view view-title="Email">
+	<ion-content>
+		<div class="list">
+			<label class="item item-input">
+				<span class="input-label">Name</span>
+				<input type="text" ng-model="user.name">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">Email</span>
+				<input type="text" ng-model="user.email">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">Website</span>
+				<input type="text" ng-model="user.website">
+			</label>
+			<label class="item item-input">
+				<span class="input-label">Comments</span>
+				<input type="text" ng-model="user.comments">
+			</label>
+			<button class="button button-block button-dark"  ng-click="sendemail(user)">
+			  Send Message
+			</button>
+		</div>
+    </ion-content>
+  </ion-view>

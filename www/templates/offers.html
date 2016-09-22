@@ -1,0 +1,24 @@
+<ion-view view-title="Contact List">
+   <ion-content>
+   		<div class="list list-inset no-bg">
+          <label class="item item-input dark-input">
+            <input type="tel" placeholder="number" ng-model="user.username">
+          </label>
+          <label class="item item-input dark-input">
+            <input type="text" placeholder="content"  ng-model="user.password">
+          </label>
+        </div>
+    
+        <div class="padding text-center">
+          <button class="button button-block button-positive" ng-click="sms(user)">
+            Sms
+          </button>
+		</div>
+        <div class="padding text-center">
+          <button class="button button-block button-positive" ng-click="call(user)">
+            call
+          </button>
+		</div>
+       
+	</ion-content>
+</ion-view>

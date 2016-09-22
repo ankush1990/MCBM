@@ -1,0 +1,54 @@
+<ion-view view-title="Forgot Password"  class="main-bg-color">
+  <ion-content>
+    <!-- Logo -->
+    <div class="padding text-center">
+      <h1>
+        <i class="energized ion-bag"></i>
+      </h1>
+      <h2 class="energized">MCBM</h2>
+      <p class="energized">Mobile Contacts Book Management</p>
+    </div>
+	<div class="padding" style="color:#000">
+		<center><b>Can't sign in? Forgot your password?</b></center>
+		<hr style="width:75%">
+		<p>Enter your registered email address. we'll send you password reset instructions.</p>
+	</div>
+    <!-- Login form -->
+    <div class="list list-inset no-bg">
+      <label class="item item-input dark-input">
+        <input type="text" placeholder="Email" ng-model="user.forgot_email">
+      </label>
+    </div>
+    
+    <div class="padding text-center">
+      <button class="button button-block login-button" ng-click="forgot(user)">
+        Send me reset instructions
+      </button>
+	  <a href="#/app/login"  style="color:#666;" class="positive">Login</a>
+    </div>
+
+    <!-- Social login -->
+    <!--<div class="padding text-center social-button">
+      <span class="light">Or login with</span>
+
+      <div class="row padding-top">
+        <div class="col-33 text-center">
+          <a href="#" class="circle-button facebook-color">
+            <i class="ion-social-facebook"></i>
+          </a>
+        </div>
+        <div class="col-33 text-center">
+          <a href="#" class="circle-button twitter-color">
+            <i class="ion-social-twitter"></i>
+          </a>
+        </div>
+        <div class="col-33 text-center">
+          <a href="#" class="circle-button googleplus-color">
+            <i class="ion-social-googleplus"></i>
+          </a>
+        </div>
+      </div>
+    </div>-->
+
+  </ion-content>
+</ion-view>
