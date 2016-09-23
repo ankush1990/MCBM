@@ -61,7 +61,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory) {
+.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http) {
 	
 	
 	$timeout( function(){ $scope.getContactList(); },1500);
