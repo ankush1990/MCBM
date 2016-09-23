@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'Contactbook' target in the 'Contactbook' project
+// Prefix header for all source files of the 'MCBM' target in the 'MCBM' project
 //
 
 #ifdef __OBJC__

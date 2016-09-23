@@ -69,6 +69,9 @@
     <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
     <access origin="*" />
     <access launch-external="yes" origin="tel:*" />
+    <access launch-external="yes" origin="geo:*" />
+    <access launch-external="yes" origin="mailto:*" />
+    <access launch-external="yes" origin="sms:*" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.7.0" />

@@ -88,7 +88,11 @@ angular.module('starter.controllers', [])
 	
 	$scope.sendsms = function(number) {
 		var content = "Hello Welcome to contact book";
-		SMS.sendSMS(number, content, function(){}, function(str){alert(str);});
+		//for sending direct message to number
+		//SMS.sendSMS(number, content, function(){}, function(str){alert(str);});
+		
+		//sending via android phone message box
+		window.open ("sms:"+number+"?body=" + "hello","_system");
 	}
 	
 	$scope.docall = function(number) {
