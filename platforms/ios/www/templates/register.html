@@ -27,7 +27,10 @@
             	<input type="text" placeholder="Email" ng-model="user.register_email">
             </label>
             <label class="item item-input dark-input">
-               	<input type="text" placeholder="Your Name" ng-model="user.register_name">
+               	<input type="text" placeholder="Type your first name" ng-model="user.register_fname">
+            </label>
+            <label class="item item-input dark-input">
+               	<input type="text" placeholder="Type your last name" ng-model="user.register_lname">
             </label>
             <div class="padding text-right">
               <button class="button login-button" ng-click="register(user)">

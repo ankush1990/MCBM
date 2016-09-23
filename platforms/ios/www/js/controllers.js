@@ -61,22 +61,44 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms) {
+.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory) {
+	$ionicHistory.nextViewOptions({
+      	disableBack: true
+    });
+	
 	$timeout( function(){ $scope.getContactList(); },1500);
-	$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner>'});
+	
+	$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner><p>Please wait it will take few minutes for synchronizing contacts.</p>'});
+	
 	$scope.getContactList = function() {
 		$scope.phoneContacts = [];
 
 		function onSuccess(contacts) {
-		  for (var i = 0; i < contacts.length; i++) {
-			var contact = contacts[i];
-			$scope.phoneContacts.push(contact);
-			$ionicLoading.hide();
-		  }
+			for (var i = 0; i < contacts.length; i++) {
+				var contact = contacts[i];
+				$scope.phoneContacts.push(contact);
+				$ionicLoading.hide();
+			}
+		  
+			var contact_data = $scope.phoneContacts;
+			var action = "store_contacts";
+			var data_parameters = "action="+action+"&user_id="+global_login_id+ "&contact_data="+contact_data;
+			$http.post(globalurl,data_parameters, {
+				headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+			})
+			.success(function(response) {
+				if(response[0].status == "Y"){
+					$rootScope.$broadcast('login_var',{global_login:response.userid});
+					$state.go('app.dashboard');
+				}
+				else{
+					
+				}
+			});
 		};
-	
+			
 		function onError(contactError) {
-		  alert(contactError);
+			alert(contactError);
 		};
 	
 		var options = {};
@@ -294,12 +316,13 @@ angular.module('starter.controllers', [])
 		var email = user.register_email;
 		var password = user.register_password;
 		var cpassword = user.register_cpassword;
-		var firstname = user.register_name;
+		var firstname = user.register_fname;
+		var lastname = user.register_lname;
 		var phone = user.register_phone;
 		
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z\-])+\.)+([a-zA-Z]{2,4})+$/;
 		
-		if(typeof email === "undefined" || typeof password === "undefined" || email == "" || password == "" || typeof cpassword === "undefined" || cpassword == "" || typeof firstname === "undefined" || firstname == "" || phone == "" || phone == "undefined" ){
+		if(typeof email === "undefined" || typeof password === "undefined" || email == "" || password == "" || typeof cpassword === "undefined" || cpassword == "" || typeof firstname === "undefined" || firstname == "" || phone == "" || phone == "undefined" || lastname == "" || lastname == "undefined" ){
 			$ionicPopup.show({
 			  template: '',
 			  title: 'Please fill all fields',
@@ -344,13 +367,13 @@ angular.module('starter.controllers', [])
 				else
 				{
 					var action = "register";
-					var data_parameters = "action="+action+"&user_email="+email+ "&password="+password+ "&firstname="+firstname+ "&phone="+phone;
+					var data_parameters = "action="+action+"&user_email="+email+ "&password="+password+ "&firstname="+firstname+ "&phone="+phone+ "&lastname="+lastname;
 					$http.post(globalurl,data_parameters, {
 						headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 					})
 					.success(function(response) {
 						if(response[0].status == "Y"){
-							$scope.user = {register_email: '',register_name : '',register_password : '',register_cpassword : '',register_phone : ''};
+							$scope.user = {register_email: '',register_fname : '',register_lname : '',register_password : '',register_cpassword : '',register_phone : ''};
 							$ionicPopup.show({
 							  template: '',
 							  title: 'You have registered Successfully',
