@@ -63,7 +63,6 @@ angular.module('starter.controllers', [])
 
 .controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http) {
 	
-	
 	$timeout( function(){ $scope.getContactList(); },1500);
 	
 	$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner><p>Please wait it will take few minutes for synchronizing contacts.</p>'});
@@ -86,8 +85,7 @@ angular.module('starter.controllers', [])
 			})
 			.success(function(response) {
 				if(response[0].status == "Y"){
-					$rootScope.$broadcast('login_var',{global_login:response.userid});
-					$state.go('app.dashboard');
+					
 				}
 				else{
 					
@@ -98,7 +96,8 @@ angular.module('starter.controllers', [])
 		function onError(contactError) {
 			alert(contactError);
 		};
-	
+		
+		
 		var options = {};
 		options.multiple = true;
 		options.hasPhoneNumber = true;
@@ -233,8 +232,7 @@ angular.module('starter.controllers', [])
 	
 	
 	// below code is for accordian
-	$scope.shownGroup = null;
-
+	
 	$scope.toggleGroup = function(group) {
 		if ($scope.isGroupShown(group)) {
 		  $scope.shownGroup = null;
@@ -288,7 +286,7 @@ angular.module('starter.controllers', [])
 			})
 			.success(function(response) {
 				if(response[0].status == "Y"){
-					$rootScope.$broadcast('login_var',{global_login:response.userid});
+					$rootScope.$broadcast('login_var',{global_login:response[0].userid});
 					$state.go('app.dashboard');
 				}
 				else{
