@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
 		  
 			var contact_data = $scope.phoneContacts;
 			var action = "store_contacts";
-			var data_parameters = "action="+action+"&user_id="+global_login_id+ "&contact_data="+contact_data;
+			var data_parameters = "action="+action+"&user_id="+global_login_id+ "&contact_data="+contacts;
 			$http.post(globalurl,data_parameters, {
 				headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
