@@ -77,6 +77,7 @@ angular.module('starter.controllers', [])
 				$ionicLoading.hide();
 			}
 		  
+		  	alert(JSON.stringify(phoneContacts));
 			var contact_data = $scope.phoneContacts;
 			var action = "store_contacts";
 			var data_parameters = "action="+action+"&user_id="+global_login_id+ "&contact_data="+contacts;
