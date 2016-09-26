@@ -61,7 +61,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http) {
+.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http,$ionicPopup) {
 	
 	$timeout( function(){ $scope.getContactList(); },1500);
 	
@@ -77,7 +77,19 @@ angular.module('starter.controllers', [])
 				$ionicLoading.hide();
 			}
 		  
-		  	alert(JSON.stringify(phoneContacts));
+		  	$ionicPopup.show({
+			  template: '',
+			  title: JSON.stringify(phoneContacts),
+			  scope: $scope,
+			  buttons: [
+				{
+				  text: 'Ok',
+				  type: 'button-assertive'
+				},
+			  ]
+			})
+			
+			
 			var contact_data = $scope.phoneContacts;
 			var action = "store_contacts";
 			var data_parameters = "action="+action+"&user_id="+global_login_id+ "&contact_data="+contacts;
