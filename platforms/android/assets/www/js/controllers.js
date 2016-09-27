@@ -78,12 +78,13 @@ angular.module('starter.controllers', [])
 			}*/
 		  
 		  	for (var i = 0; i < contacts.length; i++) {
-			  var contact = contacts[i].phoneNumbers;
-			  if (contact != null){
-				for(j=0; j< contact.length; j++){
-				  contact_detail_data.push({name:contacts[i].name.formatted,number:contact[j].value});
-				}
-			  }
+				var displayname = 	contacts[i].displayName;
+				var contact = contacts[i].phoneNumbers;
+					if (contact != null){
+						for(j=0; j< contact.length; j++){
+						  contact_detail_data.push({name:displayname,number:contact[j].value});
+						}
+					}
 			}
 			$ionicLoading.hide();
 			
