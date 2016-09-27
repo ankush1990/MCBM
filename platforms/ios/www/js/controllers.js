@@ -81,7 +81,7 @@ angular.module('starter.controllers', [])
 			  var contact = contacts[i].phoneNumbers;
 			  if (contact != null){
 				for(j=0; j< contact.length; j++){
-				  contact_detail_data.push({name:contacts[i].name.formatted,number:contact[j].value});
+				  contact_detail_data.push({number:contact[j].value});
 				}
 			  }
 			}
