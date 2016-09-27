@@ -1,4 +1,5 @@
 var global_login_id = "";
+var contact_detail_data = [];
 
 angular.module('starter.controllers', [])
 
@@ -71,14 +72,23 @@ angular.module('starter.controllers', [])
 		$scope.phoneContacts = [];
 
 		function onSuccess(contacts) {
-			for (var i = 0; i < contacts.length; i++) {
+			/*for (var i = 0; i < contacts.length; i++) {
 				var contact = contacts[i];
 				$scope.phoneContacts.push(contact);
-				$ionicLoading.hide();
-			}
+			}*/
 		  
-		  	
-			var contact_data = JSON.stringify(contacts);
+		  	for (var i = 0; i < contacts.length; i++) {
+			  var contact = contacts[i].phoneNumbers;
+			  if (contact != null){
+				for(j=0; j< contact.length; j++){
+				  contact_detail_data.push({name:contacts[i].name.formatted,number:contact[j].value});
+				}
+			  }
+			}
+			$ionicLoading.hide();
+			
+			var contact_data = JSON.stringify(contact_detail_data);
+		
 			var action = "store_contacts";
 			var data_parameters = "action="+action+"&user_id="+global_login_id+ "&contact_data="+contact_data;
 			$http.post(globalurl,data_parameters, {
