@@ -81,6 +81,7 @@ angular.module('starter.controllers', [])
 							// only include phone number of mobile not any other like watsapp
 							if(contact[j].type == "mobile"){
 						 		contact_detail_data.push({name:displayname,number:contact[j].value});
+								break;
 							}
 						}
 					}
