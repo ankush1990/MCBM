@@ -62,17 +62,33 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http) {
-	
-	$timeout( function(){ $scope.getContactList(); },1500);
+.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http,$ionicScrollDelegate,$ionicPopup) {
 	
 	$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner><p>Please wait it will take few minutes for synchronizing contacts.</p>'});
+	//$timeout( function(){ $scope.getContactList(); },1500);
+	$scope.phoneContacts = [];
+	
+	$scope.getContactList_from_server = function() {
+		var action = "get_store_contacts";
+		//var  global_login_id ="27";
+		var data_parameters = "action="+action+"&user_id="+global_login_id;
+		$http.post(globalurl,data_parameters, {
+			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+		})
+		.success(function(response) {
+			if(response[0].status == "Y"){
+				$scope.phoneContacts = response;
+				$ionicLoading.hide(); // loading hide
+			}
+			else{
+				$scope.getContactList();
+			}
+		});
+	};
+	
 	
 	$scope.getContactList = function() {
-		$scope.phoneContacts = [];
-
 		function onSuccess(contacts) {
-			
 			for (var i = 0; i < contacts.length; i++) {
 				var displayname = 	contacts[i].displayName;
 				var contact = contacts[i].phoneNumbers;
@@ -81,12 +97,11 @@ angular.module('starter.controllers', [])
 							// only include phone number of mobile not any other like watsapp
 							if(contact[j].type == "mobile"){
 						 		contact_detail_data.push({name:displayname,number:contact[j].value});
-								break;
+								break; // do break if mobile come for two times
 							}
 						}
 					}
 			}
-			$ionicLoading.hide();
 			
 			var contact_data = JSON.stringify(contact_detail_data);
 		
@@ -96,12 +111,7 @@ angular.module('starter.controllers', [])
 				headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
 			.success(function(response) {
-				if(response[0].status == "Y"){
-					
-				}
-				else{
-					
-				}
+				$scope.getContactList_from_server();
 			});
 		};
 			
@@ -114,7 +124,7 @@ angular.module('starter.controllers', [])
 		options.multiple = true;
 		options.hasPhoneNumber = true;
 		$cordovaContacts.find(options).then(onSuccess, onError);
-	}
+	};
 	
 	
 	$scope.sendsms = function(number) {
@@ -124,12 +134,49 @@ angular.module('starter.controllers', [])
 		
 		//sending via android phone message box
 		window.open ("sms:"+number+"?body=" + "hello","_system");
-	}
+	};
 	
 	$scope.docall = function(number) {
 		window.open('tel:'+number,'_system');
-	}
+	};
 	
+	// change scroll position to top while searching
+	$scope.scrollTop = function() {
+        $ionicScrollDelegate.resize();  
+    };
+	
+	//delete contact number
+	$scope.delete_contact = function(msgid) {
+		
+		var confirmPopup = $ionicPopup.confirm({
+         	title: 'Are you sure?'
+      	});
+
+		confirmPopup.then(function(res) {
+			if(res) {
+				$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner>'});
+				var action = "delete_contact";
+				var data_parameters = "action="+action+"&msg_id="+msgid;
+				$http.post(globalurl,data_parameters, {
+					headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+				})
+				.success(function(response) {
+					if(response[0].status == "Y"){
+						$scope.getContactList_from_server();
+					}
+					else{
+						//$scope.getContactList();
+					}
+				});
+			} else {
+				//console.log('Not sure!');
+			}
+		});
+		
+	};
+	
+	
+	$scope.getContactList_from_server(); // function calling
 })
 
 .controller('offersCtrl', function($scope,$state,$cordovaContacts,$cordovaSms) {
@@ -155,7 +202,7 @@ angular.module('starter.controllers', [])
 		//window.plugins.CallNumber.callNumber(onSuccess, onError, username, bypassAppChooser);
 		//window.plugins.CallNumber.callNumber(onSuccess, onError, username);
 		window.plugins.phoneDialer.dial(username);
-	}
+	};
 	
 })
 
