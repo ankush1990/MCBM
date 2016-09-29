@@ -70,7 +70,7 @@ angular.module('starter.controllers', [])
 	
 	$scope.getContactList_from_server = function() {
 		var action = "get_store_contacts";
-		var  global_login_id ="27";
+		//var  global_login_id ="27";
 		var data_parameters = "action="+action+"&user_id="+global_login_id;
 		$http.post(globalurl,data_parameters, {
 			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
