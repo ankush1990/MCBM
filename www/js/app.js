@@ -6,7 +6,7 @@ var globalurl = "http://neoterichs.com/contactbook/get_hint.php";
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +20,9 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
       StatusBar.styleDefault();
     }
 	
+	if(global_login_id != ""){
+		$state.go('app.dashboard');
+	}
   });
 })
 
@@ -71,6 +74,15 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
       }
     }
   })
+  .state('app.edit_contact', {
+    url: '/edit_contact/:msgid?contact_name?contact_number',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/edit_contact.html',
+		controller: 'edit_contact'
+	   }
+    }
+  })
 
   .state('app.about', {
       url: '/about',
@@ -80,24 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
         }
       }
     })
-    .state('app.offers', {
-      url: '/offers',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/offers.html',
-          controller: 'offersCtrl'
-        }
-      }
-    })
-	.state('app.offers-detail', {
-      url: "/offers-detail/:origin?quantity?thickness?width?length?currency?title?price",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/offers-detail.html",
-		  controller: "offers_detailCtrl"
-        }
-      }
-    })
+    
   .state('app.contact', {
     url: '/contact',
     views: {

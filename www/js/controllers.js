@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http,$ionicScrollDelegate,$ionicPopup) {
+.controller('dashboardCtrl', function($scope,$state,$cordovaContacts,$timeout,$ionicLoading,$cordovaSms,$ionicHistory,$http,$ionicScrollDelegate,$ionicPopup,$rootScope) {
 	
 	$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner><p>Please wait it will take few minutes for synchronizing contacts.</p>'});
 	//$timeout( function(){ $scope.getContactList(); },1500);
@@ -70,7 +70,7 @@ angular.module('starter.controllers', [])
 	
 	$scope.getContactList_from_server = function() {
 		var action = "get_store_contacts";
-		//var  global_login_id ="27";
+		var  global_login_id ="27";
 		var data_parameters = "action="+action+"&user_id="+global_login_id;
 		$http.post(globalurl,data_parameters, {
 			headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
@@ -146,10 +146,10 @@ angular.module('starter.controllers', [])
     };
 	
 	//delete contact number
-	$scope.delete_contact = function(msgid) {
+	$scope.delete_contact = function(msgid,contact_name) {
 		
 		var confirmPopup = $ionicPopup.confirm({
-         	title: 'Are you sure?'
+         	title: 'Are you sure to delete '+contact_name+'?'
       	});
 
 		confirmPopup.then(function(res) {
@@ -175,47 +175,73 @@ angular.module('starter.controllers', [])
 		
 	};
 	
+	//edit_contact contact number
+	$scope.edit_contact = function(msgid,contact_name,contact_number) {
+		$state.go('app.edit_contact', { 'msgid': msgid, 'contact_name': contact_name, 'contact_number': contact_number });
+	};
 	
 	$scope.getContactList_from_server(); // function calling
+	
+	$rootScope.$on("CallParentMethod_get_contact_list", function(){
+	   $scope.getContactList_from_server();
+	});
 })
 
-.controller('offersCtrl', function($scope,$state,$cordovaContacts,$cordovaSms) {
+
+.controller('edit_contact', function($scope,$state,$http,$stateParams,$ionicPopup,$ionicLoading,$rootScope) {
+	$scope.user = {name : $stateParams.contact_name,number : $stateParams.contact_number};
 	
-	$scope.sms = function(user) {
-		var username = user.username;
-		var password = user.password;
-		SMS.sendSMS(username, password, function(){}, function(str){alert(str);});
-	}
-	
-	$scope.call = function(user) {
-		var username = user.username;
-		var password = user.password;
+	//update contact details
+	$scope.update_contact = function(user) {
+		var name = user.name;
+		var number = user.number;
 		
-		function onSuccess(result){
-		  console.log("Success:"+result);
+		
+		if(typeof name === "undefined" || typeof number === "undefined" || name == "" || number == ""){
+			$ionicPopup.show({
+			  template: '',
+			  title: 'Please fill all fields',
+			  scope: $scope,
+			  buttons: [
+				{ 
+				  text: 'Ok',
+				  type: 'button-assertive'
+				},
+			  ]
+			})
+		}else{
+			$ionicLoading.show({template: '<ion-spinner icon="crescent"></ion-spinner>'});
+			var action = "edit_contact";
+			var data_parameters = "action="+action+"&msg_id="+$stateParams.msgid+"&name="+name+"&number="+number;
+			$http.post(globalurl,data_parameters, {
+				headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+			})
+			.success(function(response) {
+				if(response[0].status == "Y"){
+					$ionicLoading.hide(); // loading hide
+					$rootScope.$emit("CallParentMethod_get_contact_list", {});
+					$ionicPopup.show({
+					  template: '',
+					  title: 'Contact updated successfully.',
+					  scope: $scope,
+					  buttons: [
+						{
+						  text: 'Ok',
+						  type: 'button-assertive'
+						},
+					  ]
+					})
+				}
+				else{
+					//$scope.getContactList();
+				}
+			});
 		}
-		
-		function onError(result) {
-		  console.log("Error:"+result);
-		}
-		
-		//window.plugins.CallNumber.callNumber(onSuccess, onError, username, bypassAppChooser);
-		//window.plugins.CallNumber.callNumber(onSuccess, onError, username);
-		window.plugins.phoneDialer.dial(username);
 	};
 	
 })
 
-.controller('offers_detailCtrl', function($scope,$stateParams,$http) {
-	$scope.origin = $stateParams.origin;
-	$scope.quantity = $stateParams.quantity;
-	$scope.thickness = $stateParams.thickness;
-	$scope.width = $stateParams.width;
-	$scope.length = $stateParams.length;
-	$scope.currency = $stateParams.currency;
-	$scope.price = $stateParams.price;
-	$scope.title = $stateParams.title;
-})
+
 
 .controller('contactCtrl', function($scope) {
 	$scope.mapCreated = function(map) {

@@ -1,0 +1,17 @@
+<ion-view view-title="Edit Contact">
+	<ion-content>
+	<div class="list no-bg">
+      <label class="item item-input dark-input">
+        <input type="text" placeholder="Contact Name" ng-model="user.name">
+      </label>
+      <label class="item item-input dark-input">
+        <input type="tel" placeholder="Contact Number"  ng-model="user.number">
+      </label>
+    </div>
+    
+    <div class="padding text-center">
+      <button class="button  login-button" ng-click="update_contact(user)">
+        Update
+      </button>
+	</ion-content>
+</ion-view>

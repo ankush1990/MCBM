@@ -18,9 +18,9 @@
                  <div class="icon">
                  	<span class="ion-ios-telephone-outline" ng-click="docall(contact.contact_number)"></span>
                     &nbsp;&nbsp;
-               		<span class="ion-ios-compose-outline"> </span>
+               		<span class="ion-ios-compose-outline" ng-click="edit_contact(contact.msg_id,contact.contact_name,contact.contact_number)"> </span>
                		&nbsp;&nbsp;
-               		<span class="ion-ios-trash-outline" ng-click="delete_contact(contact.msg_id)"></span>
+               		<span class="ion-ios-trash-outline" ng-click="delete_contact(contact.msg_id,contact.contact_name)"></span>
         		</div>
               </a>
 			</div>
