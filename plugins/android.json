@@ -18,6 +18,9 @@
         },
         "com.cordova.plugins.sms": {
             "PACKAGE_NAME": "com.phonegap.root"
+        },
+        "cordova-plugin-sim": {
+            "PACKAGE_NAME": "com.phonegap.root"
         }
     },
     "dependent_plugins": {

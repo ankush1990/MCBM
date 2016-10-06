@@ -6,7 +6,7 @@ var globalurl = "http://neoterichs.com/contactbook/get_hint.php";
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
-.run(function($ionicPlatform,$state) {
+.run(function($ionicPlatform,$state,$ionicPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,6 +23,28 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 	if(global_login_id != ""){
 		$state.go('app.dashboard');
 	}
+	
+	function successCallback(result) {
+		$ionicPopup.show({
+		  template: '',
+		  title: result,
+		  scope: $scope,
+		  buttons: [
+			{ 
+			  text: 'Ok',
+			  type: 'button-assertive'
+			},
+		  ]
+		})
+  		
+	}
+
+	function errorCallback(error) {
+  		console.log(error);
+	}
+	
+	window.plugins.sim.getSimInfo(successCallback, errorCallback);
+	
   });
 })
 

@@ -18,6 +18,9 @@
     <feature name="Sms">
         <param name="ios-package" value="Sms" />
     </feature>
+    <feature name="Sim">
+        <param name="ios-package" value="Sim" />
+    </feature>
     <name>MCBM</name>
     <description>
        Mobile Contact Book Management application.
