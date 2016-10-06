@@ -29,7 +29,6 @@
   <preference name="android-minSdkVersion" value="7"/>
   <preference name="android-installLocation" value="auto"/>
   <preference name="SplashScreen" value="screen"/>
-  
   <gap:plugin name="com.ionic.keyboard" version="1.0.3"/>
   <gap:plugin name="org.apache.cordova.statusbar"/>
   <gap:plugin name="org.apache.cordova.battery-status" version="0.2.11"/>
@@ -51,7 +50,6 @@
   <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4"/>
   <gap:plugin name="org.apache.cordova.vibration" version="0.3.11"/>
   <gap:plugin name="cordova-plugin-sms" source="npm" />
-  <plugin name="com.pbakondy.sim2" spec="1.0.16" />
   
   <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png"/>
   <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/icon-48-mdpi.png"/>
