@@ -24,22 +24,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 	if(global_login_id != ""){
 		$state.go('app.dashboard');
 	}
-	var telephoneNumber = cordova.require("cordova/plugin/telephonenumber");
-	telephoneNumber.get(function(result) {
-        $ionicPopup.show({
-			  template: '',
-			  title: result,
-			  scope: $scope,
-			  buttons: [
-				{
-				  text: 'Ok',
-				  type: 'button-assertive'
-				},
-			  ]
-			})
-    }, function() {
-        console.log("error");
-    });
 	
   });
 })
