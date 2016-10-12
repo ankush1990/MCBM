@@ -1,12 +1,27 @@
 <ion-view view-title="Sign-In">
 	<ion-content>
-	<p class="text-center" style="margin-top:90px; color:#666; font-size:48px;">
+	<p class="text-center" style="margin-top:60px; margin-bottom:30px; color:#666; font-size:48px;">
 	  MCBM
 	</p>
-	<div class="list no-bg" style="margin-top:50px;">
-      <label class="item item-input dark-input">
-        <input type="text" placeholder="Email" ng-model="user.username">
-      </label>
+    <div class="list">
+	  <select ng-model="user.login_country" ng-change="getdialcode(user.login_country)" style="width:94%; margin-left:3%; margin-top:2%;">
+                <option value="{{}}">Select Country</option>
+                <option ng-repeat="respone in country_names" value="{{respone.dialcode}}">{{respone.name}}</option>
+      </select>
+    </div>
+    <div class="row">
+        <div class="col col-25">
+            <label class="input-border item item-input dark-input">
+                <input type="tel" disabled="disabled" placeholder="Dial code" ng-model="user.login_dial_code">
+            </label>
+        </div>
+        <div class="col col-75">
+            <label class="input-border item-input dark-input">
+                <input type="tel" placeholder="Phone number" ng-model="user.username">
+            </label>
+        </div>
+    </div>
+	<div class="list no-bg" >
       <label class="item item-input dark-input">
         <input type="password" placeholder="Type Password"  ng-model="user.password">
       </label>
@@ -26,6 +41,6 @@
 	  <a href="#/app/forgot" style="color:#666; margin-top:10px;"" class="positive">Forgot password ?</a>
       <a href="#/app/register" style="color:#666; margin-top:50px;" class="positive"> Create account</a>
     </div>
-    <p id="simInfo"></p>
+    <input type="text" international-phone-number only-countries ng-model="phone">
     </ion-content>
   </ion-view>

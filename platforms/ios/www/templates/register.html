@@ -8,9 +8,29 @@
                 Your Account 
           </ion-item>
           <div ng-show="isGroupShown(group)">
-            <label class="item item-input dark-input">
-            	<input type="tel" placeholder="Phone number" ng-model="user.register_phone">
-            </label>
+          	<div class="list">
+
+              <div class="item item-divider">
+                Phone Number
+              </div>
+              <select ng-model="user.register_country" ng-change="getdialcode(user.register_country)" style="width:94%; margin-left:3%; margin-top:2%;">
+						<option value="{{}}">Select Country</option>
+						<option ng-repeat="respone in country_names" value="{{respone.dialcode}},{{respone.name}}">{{respone.name}}</option>
+			  </select>
+            </div>
+          	<div class="row">
+  				<div class="col col-25">
+                	<label class="input-border item item-input dark-input">
+            			<input type="tel" disabled="disabled" placeholder="Dial code" ng-model="user.register_dial_code">
+            		</label>
+                </div>
+  				<div class="col col-75">
+  					<label class="input-border item-input dark-input">
+            			<input type="tel" placeholder="Phone number" ng-model="user.register_phone">
+            		</label>
+                </div>
+  			</div>
+            
             <label class="item item-input dark-input">
             	<input type="password" placeholder="Password" ng-model="user.register_password">
             </label>

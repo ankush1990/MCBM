@@ -25,27 +25,6 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		$state.go('app.dashboard');
 	}
 	
-	function successCallback(result) {
-		$ionicPopup.show({
-		  template: '',
-		  title: result,
-		  scope: $scope,
-		  buttons: [
-			{ 
-			  text: 'Ok',
-			  type: 'button-assertive'
-			},
-		  ]
-		})
-  		
-	}
-
-	function errorCallback(error) {
-  		console.log(error);
-	}
-	
-	window.plugins.sim.getSimInfo(successCallback, errorCallback);
-	
   });
 })
 
