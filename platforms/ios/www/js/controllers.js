@@ -554,12 +554,7 @@ angular.module('starter.controllers', [])
 	countries['Zimbabwe'] = "+263";
 
 	// make array to json 
-	var countries_json_data = [];
-	// associative array loop
-	for(var p = 0; p < Object.keys(countries).length; p++){
-		countries_json_data.push({ "name" : Object.keys(countries)[p],"dialcode"  : Object.values(countries)[p]});
-	}
-	$scope.country_names = countries_json_data;
+	
 	
 	
 	$scope.getdialcode = function(value) {
