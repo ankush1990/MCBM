@@ -567,40 +567,6 @@ angular.module('starter.controllers', [])
 		$scope.user = {register_dial_code: datasplit[0],login_dial_code: datasplit[0],register_country: datasplit[1]};
 	};
 	
-	// get lat,long,country name and phone code
-	navigator.geolocation.getCurrentPosition(function (pos) {
-		 var lat = pos.coords.latitude;
-		 var long = pos.coords.longitude;
-		 var geocoder = new google.maps.Geocoder();
-		 var latlng = new google.maps.LatLng(lat, long);
-
-			geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					if (results[1]) {
-						// get country name using loop
-						for(var j=0;j < results[1].address_components.length;j++){
-							var cn = results[1].address_components[j].types[0];
-							if(cn == "country")
-							{
-								 country_name = results[1].address_components[j].long_name;
-								 break;
-							}
-							
-						}
-						// automatic set country and country code according to the location
-						$scope.user = {register_dial_code : countries[country_name],login_dial_code: countries[country_name],register_country: country_name};
-						
-					} else {
-						console.log('Location not found');
-					}
-				} else {
-					console.log('Geocoder failed due to: ' + status);
-				}
-			})
-	}, function (error) {
-		  alert('Unable to get location: ' + error.message);
-	});
-	
 	
 	
 	// below code is for accordian
