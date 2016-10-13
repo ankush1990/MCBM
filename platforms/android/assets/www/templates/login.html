@@ -6,7 +6,7 @@
     <div class="list">
 	  <select ng-model="user.login_country" ng-change="getdialcode(user.login_country)" style="width:94%; margin-left:3%; margin-top:2%;">
                 <option value="{{}}">Select Country</option>
-                <option ng-repeat="respone in country_names" value="{{respone.dial_code}}">{{respone.name}}</option>
+                <option ng-selected="respone.name == user.s_country_name" ng-repeat="respone in country_names" value="{{respone.dial_code}},{{respone.name}}">{{respone.name}}</option>
       </select>
     </div>
     <div class="row">

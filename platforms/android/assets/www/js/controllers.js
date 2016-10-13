@@ -327,7 +327,7 @@ angular.module('starter.controllers', [])
 	
 	$scope.getdialcode = function(value) {
 		var datasplit = value.split(",");
-		$scope.user = {register_dial_code: datasplit[0],login_dial_code: datasplit[0],register_country: datasplit[1]};
+		$scope.user = {register_dial_code: datasplit[0],login_dial_code: datasplit[0],register_country: datasplit[1],s_country_name:datasplit[1]};
 	};
 	
 	// get lat,long,country name and phone code
@@ -358,7 +358,7 @@ angular.module('starter.controllers', [])
 							}
                 		}
 						// automatic set country and country code according to the location
-						$scope.user = {register_dial_code : country_dial_code,login_dial_code: country_dial_code,register_country: country_name};
+						$scope.user = {register_dial_code : country_dial_code,login_dial_code: country_dial_code,register_country: country_name,login_country:country_name,s_country_name:country_name};
 						
 					} else {
 						console.log('Location not found');
