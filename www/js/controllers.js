@@ -404,7 +404,7 @@ angular.module('starter.controllers', [])
    	$scope.signIn = function(user) {
 		var username = user.username;
 		var password = user.password;
-		
+		var dial_code = user.login_dial_code;
 		
 		if(typeof username === "undefined" || typeof password === "undefined" || username == "" || password == ""){
 			$ionicPopup.show({
@@ -421,7 +421,7 @@ angular.module('starter.controllers', [])
 		}
 		else{
 			var action = "login";
-			var data_parameters = "action="+action+"&username="+username+ "&password="+password;
+			var data_parameters = "action="+action+"&username="+username+ "&password="+password+ "&dial_code="+dial_code;
 			$http.post(globalurl,data_parameters, {
 				headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
 			})
